@@ -1,0 +1,49 @@
+<table>
+  <tr>
+    <th>Book Name</th>
+    <th>Author</th>
+    <th>Quantity</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>
+      <input type="text" [(ngModel)]="_newBook.Name" />
+    </td>
+    <td>
+      <input type="text" [(ngModel)]="_newBook.Author" />
+    </td>
+    <td>
+      <input type="text" [(ngModel)]="_newBook.Quantity" />
+    </td>
+    <td>
+      <button (click)="addBook()">Add</button>
+    </td>
+    <td>
+      <button (click)="clearNewBook()">Cancel</button>
+    </td>
+  </tr>
+  <tr *ngFor="let book of _books" [attr.data-id]="book.Id">
+    <td>
+      <input type="text" *ngIf="book.editing" [(ngModel)]="_oldBook.Name" />
+      <span *ngIf="!book.editing">
+        {{book.Name}}
+      </span>
+    </td>
+    <td>
+      <input type="text" *ngIf="book.editing" [(ngModel)]="_oldBook.Country" />
+      <span *ngIf="!book.editing">{{book.Author}}</span>
+    </td>
+    <td>
+      <input type="text" *ngIf="book.editing" [(ngModel)]="_oldBook.City" />
+      <span *ngIf="!book.editing">{{book.Quantity}}</span>
+    </td>
+    <td>
+      <button *ngIf="book.editing" (click)="updateBook();book.editing=false">Update</button>
+      <button *ngIf="!book.editing" (click)="getBook(book.Id);book.editing=true;">Edit</button>
+    </td>
+    <td>
+      <button (click)="deleteBook(book.Id)">Delete</button>
+    </td>
+  </tr>
+</table>

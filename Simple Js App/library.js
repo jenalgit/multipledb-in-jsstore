@@ -178,7 +178,7 @@ var Book = {
                 Id: Number(Row.attr('data-id')),
                 Name: Row.find('td:nth-child(1) input').val(),
                 Author: Row.find('td:nth-child(2) input').val(),
-                Quantity: Row.find('td:nth-child(3) input').val()
+                Quantity: Number(Row.find('td:nth-child(3) input').val())
             };
         Connection.update({
             In: 'Books',
@@ -187,8 +187,8 @@ var Book = {
             },
             Set: {
                 Name: Value.Name,
-                Semester: Value.Semester,
-                Course: Value.Course
+                Author: Value.Author,
+                Quantity: Value.Quantity
             },
             OnSuccess: function (rowsUpdated) {
                 if (rowsUpdated > 0) {

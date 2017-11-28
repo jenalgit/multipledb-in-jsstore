@@ -1,0 +1,49 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Semester</th>
+    <th>Course</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>
+      <input type="text" [(ngModel)]="_newStudent.Name" />
+    </td>
+    <td>
+      <input type="text" [(ngModel)]="_newStudent.Semester" />
+    </td>
+    <td>
+      <input type="text" [(ngModel)]="_newStudent.Course" />
+    </td>
+    <td>
+      <button (click)="addStudent()">Add</button>
+    </td>
+    <td>
+      <button (click)="clearNewStudent()">Cancel</button>
+    </td>
+  </tr>
+  <tr *ngFor="let student of _students" [attr.data-id]="student.Id">
+    <td>
+      <input type="text" *ngIf="student.editing" [(ngModel)]="_oldStudent.Name" />
+      <span *ngIf="!student.editing">
+        {{student.Name}}
+      </span>
+    </td>
+    <td>
+      <input type="text" *ngIf="student.editing" [(ngModel)]="_oldStudent.Semester" />
+      <span *ngIf="!student.editing">{{student.Semester}}</span>
+    </td>
+    <td>
+      <input type="text" *ngIf="student.editing" [(ngModel)]="_oldStudent.Course" />
+      <span *ngIf="!student.editing">{{student.Course}}</span>
+    </td>
+    <td>
+      <button *ngIf="student.editing" (click)="updateStudent();student.editing=false">Update</button>
+      <button *ngIf="!student.editing" (click)="getStudent(student.Id);student.editing=true;">Edit</button>
+    </td>
+    <td>
+      <button (click)="deleteStudent(student.Id)">Delete</button>
+    </td>
+  </tr>
+</table>
